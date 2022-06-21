@@ -92,10 +92,13 @@ public class ImageObjectDetectionService {
             listOfImages.stream().forEach(image -> {
                 image.getObjectsDetected().stream().forEach(object -> {
                     keywords.stream().forEach(keyword -> {
-                        if (keyword.equalsIgnoreCase(object.getSpecificObjectDetected())) {
+                        if (keyword.equalsIgnoreCase(object.getSpecificObjectDetected()) || keyword.equalsIgnoreCase(image.getObjectLabel())) {
                             Image matchedImage = null;
                             try {
                                 matchedImage = getImage(image.getImage_id());
+                                if (matchedImages.contains(matchedImage)) {
+                                    return;
+                                }
                             } catch (ResourceNotFoundException e) {
                                 e.printStackTrace();
                             }

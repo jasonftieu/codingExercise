@@ -17,6 +17,5 @@ public class ImageResponse {
     private String imageData;
     private String label;
     private Long id;
-    @JsonIgnore
     private List<Object> objectsDetected;
 }
