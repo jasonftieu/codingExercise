@@ -53,11 +53,11 @@ public class VisionController {
     }
 
     @GetMapping("/images/{id}")
-    public Image getImage(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<Image> getImage(@PathVariable Long id) throws ResourceNotFoundException {
         if (Objects.isNull(id)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id must not be empty or null");
         }
-        return imageObjectDetectionService.getImage(id);
+        return new ResponseEntity<>(imageObjectDetectionService.getImage(id), HttpStatus.OK);
     }
 
     @PostMapping("/images")
